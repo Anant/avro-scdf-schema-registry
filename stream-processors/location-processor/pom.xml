@@ -35,13 +35,13 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-    <!--  based on https://www.baeldung.com/spring-cloud-stream-kafka-avro-confluent#set-up -->
+		<!--  based on https://stackoverflow.com/questions/62399138/spring-cloud-hoxton-sr5-incompatibility-with-latest-version-of-spring-cloud-sche, but using version provided by BOM -->
 		<dependency>
 				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-stream-schema</artifactId>
-				<!--  TODO watch out for this version, it might be the wrong one -->
-				<version>2.2.1.RELEASE</version>
-		</dependency> 
+				<artifactId>spring-cloud-schema-registry-client</artifactId>
+		</dependency>  
+			
+
 
 		<dependency>
 				<groupId>org.apache.avro</groupId>
