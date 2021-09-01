@@ -1,6 +1,11 @@
 # Deploy Spring Cloud Stream locally using Docker-compose
 For reproducing error described here: https://stackoverflow.com/questions/68993255/spring-cloud-stream-is-generating-avro-schema-in-confluent-schema-registry-witho
 
+Made following this example:
+- https://github.com/spring-cloud/spring-cloud-dataflow-samples/tree/master/dataflow-website/stream-developer-guides/streams/standalone-stream-sample
+
+Then combined with example from this blog to add Kafka Schema registry integration:
+- https://www.baeldung.com/spring-cloud-stream-kafka-avro-confluent
 
 
 # Instructions for Reproducing error
