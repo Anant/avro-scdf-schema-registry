@@ -1,17 +1,20 @@
-# Deploy Spring Cloud Data Flow locally using Docker-compose
+# Deploy Spring Cloud Stream locally using Docker-compose
+For reproducing error described here: https://stackoverflow.com/questions/68993255/spring-cloud-stream-is-generating-avro-schema-in-confluent-schema-registry-witho
 
+
+
+# Instructions for Reproducing error
 ```
 docker-compose up -d
 ```
 
-## Run using Spring Cloud Data Flow
-
 ### Build the jar
 ```
+cd stream-processors/location-processor
 ./mvnw clean package
 ```
 
-### Run within Kafka (makes networking easy)
+### Run Jar within Kafka (makes networking easy)
 ```
 docker cp target/location-processor-0.0.1-SNAPSHOT.jar broker:/ && \
 docker exec broker java -jar /location-processor-0.0.1-SNAPSHOT.jar
