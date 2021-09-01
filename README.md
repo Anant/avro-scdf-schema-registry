@@ -58,3 +58,27 @@ If error is reproduced for you, you should see something like this:
 "\u0002a\u0002\u0010fake-lat\u0002\u0012fake-long"
 ```
 
+### Check Schema
+
+Source (input) topic:
+```
+docker exec -it schema-registry curl localhost:8081/subjects/input-value/versions/
+# then using result, choose a version and query, e.g., for version 1
+docker exec -it schema-registry curl localhost:8081/subjects/input-value/versions/1
+```
+
+Expected result:
+> {"subject":"input-value","version":3,"id":5,"schema":"{\"type\":\"record\",\"name\":\"Location\",\"namespace\":\"scdfpoc\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"latitude\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"longitude\",\"type\":[\"null\",\"string\"],\"default\":null}]}"}
+
+
+Sink (output) topic:
+```
+docker exec -it schema-registry curl localhost:8081/subjects/output-value/versions/
+# then using result, choose a version and query, e.g., for version 1
+docker exec -it schema-registry curl localhost:8081/subjects/output-value/versions/1
+```
+
+Expected result (if bug is successfully being reproduced):
+> {"subject":"output-value","version":1,"id":6,"schema":"\"bytes\""}
+
+Note how schema just says "bytes"
