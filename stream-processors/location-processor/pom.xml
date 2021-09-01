@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>us.anant.dataflow.sample</groupId>
+    <artifactId>stream-processors</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<artifactId>location-processor</artifactId>
+	<name>location-processor</name>
+	<description>SCDF processor app for enriching location records</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-stream</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents.client5</groupId>
+			<artifactId>httpclient5-fluent</artifactId>
+			<version>5.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20210307</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+    <!--  based on https://www.baeldung.com/spring-cloud-stream-kafka-avro-confluent#set-up -->
+		<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-stream-schema</artifactId>
+				<!--  TODO watch out for this version, it might be the wrong one -->
+				<version>2.2.1.RELEASE</version>
+		</dependency> 
+
+		<dependency>
+				<groupId>org.apache.avro</groupId>
+				<artifactId>avro</artifactId>
+				<version>${avro.version}</version>
+				<scope>compile</scope>
+		</dependency> 
+
+    <!--  based on https://www.baeldung.com/spring-cloud-stream-kafka-avro-confluent#set-up -->
+		<dependency>
+				<groupId>io.confluent</groupId>
+				<artifactId>kafka-avro-serializer</artifactId>
+				<version>${confluent.version}</version>
+		</dependency>
+
+    <!--  based on https://www.baeldung.com/spring-cloud-stream-kafka-avro-confluent#set-up -->
+		<dependency>
+				<groupId>org.apache.avro</groupId>
+				<artifactId>avro-maven-plugin</artifactId>
+				<version>${avro.version}</version>
+		</dependency>
+
+
+    <!--  based on https://www.baeldung.com/spring-cloud-stream-kafka-avro-confluent#set-up -->
+		<dependency>
+				<groupId>org.apache.avro</groupId>
+				<artifactId>avro-compiler</artifactId>
+				<version>${avro.version}</version>
+		</dependency>
+
+
+    <!--  based on SCDF usage details tutorial  -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-stream</artifactId>
+			<type>test-jar</type>
+			<classifier>test-binder</classifier>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+			<plugins>
+						<plugin>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-maven-plugin</artifactId>
+                <version>${avro.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>schema</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>${project.basedir}/src/main/resources/avro</sourceDirectory>
+                            <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+                            <imports>
+                                <import>${project.basedir}/src/main/resources/avro/location.avsc</import>
+                            </imports>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+  </build>
+</project>

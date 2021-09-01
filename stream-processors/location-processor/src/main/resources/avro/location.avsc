@@ -1,0 +1,27 @@
+{
+    "name": "Location",
+    "namespace": "scdfpoc",
+    "type": "record",
+    "fields": [
+        {
+            "name": "id",
+            "type": "string"
+        },
+        {
+            "default": null,
+            "name": "latitude",
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        {
+            "default": null,
+            "name": "longitude",
+            "type": [
+                "null",
+                "string"
+            ]
+        }
+    ]
+}
